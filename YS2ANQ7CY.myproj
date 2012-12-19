@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{fb292b45-d6fd-4a72-8b8b-2f28715bb921}</ProjectGuid>
+    <ProjectType>CopernicusProject</ProjectType>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Name>YS2ANQ7CY</Name>
+    <RootNamespace>YS2ANQ7CY</RootNamespace>
+    <RepositoryNamespace>http://0001085997-one-off.sap.com/YS2ANQ7CY_</RepositoryNamespace>
+    <RuntimeNamespacePrefix>YS2ANQ7CY_</RuntimeNamespacePrefix>
+    <RepositoryRootFolder>/YS2ANQ7CY_MAIN</RepositoryRootFolder>
+    <DefaultProcessComponent>YS2ANQ7CY_YS2ANQ7CY</DefaultProcessComponent>
+    <DevelopmentPackage>$YS2ANQ7CY_DEV</DevelopmentPackage>
+    <XRepSolution>YS2ANQ7CY_MAIN</XRepSolution>
+    <BCSourceFolderInXRep>/YS2ANQ7CY_BC/SRC</BCSourceFolderInXRep>
+    <ProjectSourceFolderinXRep>/YS2ANQ7CY_MAIN/SRC</ProjectSourceFolderinXRep>
+    <DeploymentUnit>CUSTOMER_RELATIONSHIP_MGMT</DeploymentUnit>
+    <CompilerVersion>FP40</CompilerVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="ATP-Item.node">
+      <DependentUpon>ATP.xbo</DependentUpon>
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="ATP-Root-Event-BeforeSave.absl">
+      <DependentUpon>ATP-Root.node</DependentUpon>
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="ATP-Root.node">
+      <DependentUpon>ATP.xbo</DependentUpon>
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="ATP.xbo">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ATP_Result.QA.uicomponent">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

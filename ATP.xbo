@@ -1,0 +1,23 @@
+﻿import AP.Common.GDT;
+import AP.CRM.Global;
+import BASIS.Global as BA;
+import ABSL;
+
+[Extension] businessobject AP.CRM.Global:ServiceOrder {
+ 
+        // You must activate this business object before you can access the extension fields
+        // or messages in script files, forms, and screens.
+
+    
+		element ChangeCount:Amount;
+   		node ServiceReferenceObject {
+   	    } 
+    
+   		node Item {
+			element OnhandStock:Text;
+			element OnhandStock02:Text;
+			element RefreshDateTime:Text;
+   	    } 
+     
+  
+}

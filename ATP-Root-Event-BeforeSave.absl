@@ -1,0 +1,77 @@
+﻿/*
+	Add your SAP Business ByDesign scripting language implementation for:
+		Business Object: ServiceOrder
+		Node: Root
+		Event: BeforeSave 
+		
+	Note: 
+	  - To access the elements of the business object node, 
+	    use path expressions, for example, this.<element name>. 
+	  - To use code completion, press CTRL+J. 
+*/
+
+import ABSL;
+
+
+var item;
+
+var serviceID :String; 
+var parameter :NameAndValue;
+var parameters : collectionof NameAndValue;
+var Date;
+var Hour;
+var Min;
+var Year;
+var Month;
+var Day;
+var CurrentDateTime :GLOBAL_DateTime;
+
+
+foreach (item in this.Item)
+{ 
+
+	serviceID = "PW00002"; 
+	parameter.Name = "Product"; 
+//	parameter.Value = "P0292336MB"; 
+	parameter.Value = item.ItemProduct.ProductKey.ProductID.content;
+	parameters.Add(parameter); 
+	var result = WebServiceUtilities.ExecuteWebService(serviceID, parameters); 
+	var content = result.ResponseContent; 
+	var returnCode = result.ReturnCode;
+
+	var startvalue = content.Find("<return>");
+	var endvalue = content.Find("</return>");
+	var length = endvalue - startvalue - 8;
+	var start = startvalue + 8;
+	var want = content.Substring(start,length);
+
+	item.OnhandStock = want;
+
+//=============================================================================================
+	//var request : Library::ATP.checkStock.Request;
+	//request.arg0 = "P0292336MB";
+//
+	//var response = Library::ATP.checkStock(request, "20046128", "ATPCom");
+	//item.OnhandStock = response.return;
+
+//=============================================================================================
+
+	
+	CurrentDateTime = Context.GetCurrentGlobalDateTime();
+	Date = CurrentDateTime.GetDate();
+	Year = CurrentDateTime.GetYear();
+	Month = CurrentDateTime.GetMonth();
+	Day = CurrentDateTime.GetDay();
+	Hour = CurrentDateTime.GetHour();
+	Min = CurrentDateTime.GetMinute();
+	item.RefreshDateTime = Year.Concatenate(".");
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(Month);
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(".");
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(Day);
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(" ");
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(Hour);
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(":");
+	item.RefreshDateTime = item.RefreshDateTime.Concatenate(Min);
+	
+}
+
